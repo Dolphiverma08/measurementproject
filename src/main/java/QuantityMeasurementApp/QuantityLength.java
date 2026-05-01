@@ -21,6 +21,12 @@ public class QuantityLength {
         return Double.compare(this.toBaseFeet(), other.toBaseFeet()) == 0;
     }
 
+    public QuantityLength add(QuantityLength other) {
+        double sumInFeet = this.toBaseFeet() + other.toBaseFeet();
+        double result = sumInFeet / this.unit.getConversionFactor();
+        return new QuantityLength(Math.round(result * 100.0) / 100.0, this.unit);
+    }
+
     public QuantityLength convertTo(LengthUnit target) {
         double inFeet = toBaseFeet();
         double converted = inFeet / target.getConversionFactor();
