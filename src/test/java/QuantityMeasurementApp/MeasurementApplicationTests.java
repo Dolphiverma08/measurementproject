@@ -58,9 +58,11 @@ class MeasurementApplicationTests {
     }
 
     @Test
+    @SuppressWarnings({"unchecked", "rawtypes"})
     void testSubtraction_CrossCategory_ThrowsException() {
-        assertThrows(IllegalArgumentException.class,
-                () -> new Quantity<>(10.0, LengthUnit.FEET).subtract(new Quantity<>(5.0, WeightUnit.KILOGRAM)));
+        Quantity q1 = new Quantity<>(10.0, LengthUnit.FEET);
+        Quantity q2 = new Quantity<>(5.0, WeightUnit.KILOGRAM);
+        assertThrows(IllegalArgumentException.class, () -> q1.subtract(q2));
     }
 
     // --- UC12: Division ---
