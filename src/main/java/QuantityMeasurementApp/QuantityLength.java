@@ -22,9 +22,13 @@ public class QuantityLength {
     }
 
     public QuantityLength add(QuantityLength other) {
+        return add(other, this.unit);
+    }
+
+    public QuantityLength add(QuantityLength other, LengthUnit target) {
         double sumInFeet = this.toBaseFeet() + other.toBaseFeet();
-        double result = sumInFeet / this.unit.getConversionFactor();
-        return new QuantityLength(Math.round(result * 100.0) / 100.0, this.unit);
+        double result = sumInFeet / target.getConversionFactor();
+        return new QuantityLength(Math.round(result * 100.0) / 100.0, target);
     }
 
     public QuantityLength convertTo(LengthUnit target) {
