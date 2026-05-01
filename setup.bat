@@ -1,10 +1,38 @@
 @echo off
+
+rem =====================================================
+rem   BEFORE RUNNING THIS FILE:
+rem   1. Right-click this file
+rem   2. Click "Open with" then "Notepad"
+rem   3. Replace PASTE_YOUR_GITHUB_URL_HERE below
+rem      with your actual GitHub repo URL
+rem      Example: https://github.com/YourName/QuantityMeasurementApp.git
+rem   4. Save and close Notepad
+rem   5. Double-click this file to run
+rem =====================================================
+
+set REPO_URL=PASTE_YOUR_GITHUB_URL_HERE
+
+rem =====================================================
+rem   DO NOT EDIT ANYTHING BELOW THIS LINE
+rem =====================================================
+
+if "%REPO_URL%"=="PASTE_YOUR_GITHUB_URL_HERE" (
+    echo ERROR: You forgot to add your GitHub URL!
+    echo.
+    echo Right-click this file, open with Notepad,
+    echo and replace PASTE_YOUR_GITHUB_URL_HERE with your URL.
+    echo.
+    pause
+    exit
+)
+
 echo =====================================================
-echo   Setup - Copy all branches to your GitHub
+echo   Setup - Copying all branches to your GitHub
 echo =====================================================
 echo.
 
-echo Fetching all branches from original repo...
+echo Fetching all branches...
 git fetch --all
 echo.
 
@@ -23,14 +51,6 @@ git checkout -B "feature/UC10-GenericQuantity" "origin/feature/UC10-GenericQuant
 git checkout -B "feature/UC-11VolumeMeasurement" "origin/feature/UC-11VolumeMeasurement"
 git checkout -B "feature/UC12-SubtractionDivision" "origin/feature/UC12-SubtractionDivision"
 git checkout -B "feature/UC13-CentralizedArithmetic" "origin/feature/UC13-CentralizedArithmetic"
-echo.
-
-echo =====================================================
-echo   Go to github.com, create an empty repo,
-echo   copy the URL, then paste it below
-echo =====================================================
-echo.
-set /p REPO_URL="Paste your GitHub repo URL here and press Enter: "
 echo.
 
 echo Adding your GitHub repo...
