@@ -21,6 +21,23 @@ public class Quantity<U extends IMeasurable> {
         return new Quantity<>(round(target.convertFromBaseUnit(sum)), target);
     }
 
+    public Quantity<U> subtract(Quantity<U> other) {
+        return subtract(other, this.unit);
+    }
+
+    public Quantity<U> subtract(Quantity<U> other, U target) {
+        validateOperand(other);
+        double diff = unit.convertToBaseUnit(this.value) - other.unit.convertToBaseUnit(other.value);
+        return new Quantity<>(round(target.convertFromBaseUnit(diff)), target);
+    }
+
+    public double divide(Quantity<U> other) {
+        validateOperand(other);
+        double divisor = other.unit.convertToBaseUnit(other.value);
+        if (Double.compare(divisor, 0.0) == 0) throw new ArithmeticException("Cannot divide by zero");
+        return unit.convertToBaseUnit(this.value) / divisor;
+    }
+
     public Quantity<U> convertTo(U target) {
         double converted = target.convertFromBaseUnit(unit.convertToBaseUnit(this.value));
         return new Quantity<>(round(converted), target);
