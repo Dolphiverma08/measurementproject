@@ -32,7 +32,7 @@ public class QuantityWeight {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
         QuantityWeight other = (QuantityWeight) obj;
-        return Double.compare(unit.convertToBaseUnit(this.value), other.unit.convertToBaseUnit(other.value)) == 0;
+        return Math.abs(unit.convertToBaseUnit(this.value) - other.unit.convertToBaseUnit(other.value)) < 1e-4;
     }
 
     @Override
