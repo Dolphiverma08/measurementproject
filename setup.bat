@@ -1,69 +1,45 @@
 @echo off
 
-rem =====================================================
-rem   BEFORE RUNNING THIS FILE:
-rem   1. Right-click this file
-rem   2. Click "Open with" then "Notepad"
-rem   3. Replace PASTE_YOUR_GITHUB_URL_HERE below
-rem      with your actual GitHub repo URL
-rem      Example: https://github.com/YourName/QuantityMeasurementApp.git
-rem   4. Save and close Notepad
-rem   5. Double-click this file to run
-rem =====================================================
+echo =====================================================
+echo   BEFORE RUNNING:
+echo   1. Open setup_config.txt in Notepad
+echo   2. Fill in your NAME, EMAIL and REPO URL
+echo   3. Save it
+echo   4. Come back and press any key
+echo =====================================================
+echo.
+pause
 
-set REPO_URL=PASTE_YOUR_GITHUB_URL_HERE
+rem Read values from setup_config.txt
+for /f "tokens=1,2 delims==" %%a in (setup_config.txt) do (
+    if "%%a"=="NAME"  set MY_NAME=%%b
+    if "%%a"=="EMAIL" set MY_EMAIL=%%b
+    if "%%a"=="REPO"  set MY_REPO=%%b
+)
 
-rem =====================================================
-rem   DO NOT EDIT ANYTHING BELOW THIS LINE
-rem =====================================================
-
-if "%REPO_URL%"=="PASTE_YOUR_GITHUB_URL_HERE" (
-    echo ERROR: You forgot to add your GitHub URL!
+rem Check if user filled in the values
+if "%MY_REPO%"=="YOUR_GITHUB_REPO_URL_HERE" (
     echo.
-    echo Right-click this file, open with Notepad,
-    echo and replace PASTE_YOUR_GITHUB_URL_HERE with your URL.
+    echo  ERROR: You forgot to fill in setup_config.txt!
+    echo  Open it in Notepad, fill in all 3 lines, save, then run this again.
     echo.
     pause
     exit
 )
 
-echo =====================================================
-echo   Setup - Copying all branches to your GitHub
-echo =====================================================
+echo.
+echo Running setup - this will take a few minutes...
 echo.
 
-echo Fetching all branches...
-git fetch --all
-echo.
+rem Try common Git Bash locations
+if exist "C:\Program Files\Git\bin\bash.exe" (
+    "C:\Program Files\Git\bin\bash.exe" setup.sh "%MY_NAME%" "%MY_EMAIL%" "%MY_REPO%"
+) else if exist "C:\Program Files (x86)\Git\bin\bash.exe" (
+    "C:\Program Files (x86)\Git\bin\bash.exe" setup.sh "%MY_NAME%" "%MY_EMAIL%" "%MY_REPO%"
+) else (
+    echo ERROR: Git Bash not found.
+    echo Make sure Git is installed from https://git-scm.com/download/win
+)
 
-echo Creating local branches...
-git checkout -B dev origin/dev
-git checkout -B "feature/UC1-feet-equality" "origin/feature/UC1-feet-equality"
-git checkout -B "feature/UC2-inch-equality" "origin/feature/UC2-inch-equality"
-git checkout -B "feature/UC3-LengthConversion" "origin/feature/UC3-LengthConversion"
-git checkout -B "feature/UC4-ExtendedUnitSupport" "origin/feature/UC4-ExtendedUnitSupport"
-git checkout -B "feature/UC5-UnitToUnitConversion" "origin/feature/UC5-UnitToUnitConversion"
-git checkout -B "feature/UC6-AdditionLengthUnits" "origin/feature/UC6-AdditionLengthUnits"
-git checkout -B "feature/UC7-AdditionTargetUnit" "origin/feature/UC7-AdditionTargetUnit"
-git checkout -B "feature/UC8-RefactorUnitEnum" "origin/feature/UC8-RefactorUnitEnum"
-git checkout -B "feature/UC9-WeightMeasurement" "origin/feature/UC9-WeightMeasurement"
-git checkout -B "feature/UC10-GenericQuantity" "origin/feature/UC10-GenericQuantity"
-git checkout -B "feature/UC-11VolumeMeasurement" "origin/feature/UC-11VolumeMeasurement"
-git checkout -B "feature/UC12-SubtractionDivision" "origin/feature/UC12-SubtractionDivision"
-git checkout -B "feature/UC13-CentralizedArithmetic" "origin/feature/UC13-CentralizedArithmetic"
-echo.
-
-echo Adding your GitHub repo...
-git remote add myfork "%REPO_URL%"
-if errorlevel 1 git remote set-url myfork "%REPO_URL%"
-echo.
-
-echo Pushing all 13 branches to your GitHub...
-git push myfork --all
-echo.
-
-echo =====================================================
-echo   DONE! All 13 branches are now on your GitHub!
-echo =====================================================
 echo.
 pause
