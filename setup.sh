@@ -1,8 +1,8 @@
 #!/bin/bash
 
-MY_REPO="$1"
-MY_NAME="Student"
-MY_EMAIL="noreply@github.com"
+MY_NAME="$1"
+MY_EMAIL="$2"
+MY_REPO="$3"
 ORIGINAL="https://github.com/dhruv608/QuantityMeasurementApp-.git"
 
 echo ""
@@ -15,7 +15,7 @@ cd _mirror_temp
 
 echo ""
 echo "====================================================="
-echo "  Step 2: Rewriting commits..."
+echo "  Step 2: Rewriting commits with your details..."
 echo "====================================================="
 git filter-branch -f --env-filter "
 GIT_AUTHOR_NAME='$MY_NAME'
@@ -37,5 +37,6 @@ rm -rf _mirror_temp
 
 echo ""
 echo "====================================================="
-echo "  DONE! All 14 branches are now on your GitHub!"
+echo "  DONE! All 14 branches are now on YOUR GitHub!"
+echo "  Your profile appears on every commit."
 echo "====================================================="
