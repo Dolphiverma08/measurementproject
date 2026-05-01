@@ -9,8 +9,20 @@ public class QuantityLength {
         this.unit = unit;
     }
 
-    private double toBaseFeet() {
-        return value * unit.getConversionFactor();
+    public QuantityLength add(QuantityLength other) {
+        return add(other, this.unit);
+    }
+
+    public QuantityLength add(QuantityLength other, LengthUnit target) {
+        double sum = unit.convertToBaseUnit(this.value) + other.unit.convertToBaseUnit(other.value);
+        double result = target.convertFromBaseUnit(sum);
+        return new QuantityLength(Math.round(result * 100.0) / 100.0, target);
+    }
+
+    public QuantityLength convertTo(LengthUnit target) {
+        double inBase = unit.convertToBaseUnit(this.value);
+        double converted = target.convertFromBaseUnit(inBase);
+        return new QuantityLength(Math.round(converted * 100.0) / 100.0, target);
     }
 
     @Override
@@ -18,23 +30,7 @@ public class QuantityLength {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
         QuantityLength other = (QuantityLength) obj;
-        return Double.compare(this.toBaseFeet(), other.toBaseFeet()) == 0;
-    }
-
-    public QuantityLength add(QuantityLength other) {
-        return add(other, this.unit);
-    }
-
-    public QuantityLength add(QuantityLength other, LengthUnit target) {
-        double sumInFeet = this.toBaseFeet() + other.toBaseFeet();
-        double result = sumInFeet / target.getConversionFactor();
-        return new QuantityLength(Math.round(result * 100.0) / 100.0, target);
-    }
-
-    public QuantityLength convertTo(LengthUnit target) {
-        double inFeet = toBaseFeet();
-        double converted = inFeet / target.getConversionFactor();
-        return new QuantityLength(Math.round(converted * 100.0) / 100.0, target);
+        return Double.compare(unit.convertToBaseUnit(this.value), other.unit.convertToBaseUnit(other.value)) == 0;
     }
 
     @Override
