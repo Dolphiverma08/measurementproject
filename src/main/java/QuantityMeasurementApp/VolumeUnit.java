@@ -1,6 +1,6 @@
 package QuantityMeasurementApp;
 
-public enum VolumeUnit implements IMeasurable {
+public enum VolumeUnit implements IMeasurable, QuantityDTO.IMeasurableUnit {
     LITRE(1.0),
     MILLILITRE(0.001),
     GALLON(3.78541);
@@ -29,5 +29,15 @@ public enum VolumeUnit implements IMeasurable {
     @Override
     public String getUnitName() {
         return name();
+    }
+
+    @Override
+    public String getMeasurementType() {
+        return "VOLUME";
+    }
+
+    @Override
+    public IMeasurable getUnitInstance(String name) {
+        return VolumeUnit.valueOf(name);
     }
 }

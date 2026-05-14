@@ -2,7 +2,7 @@ package QuantityMeasurementApp;
 
 import java.util.function.Function;
 
-public enum TemperatureUnit implements IMeasurable {
+public enum TemperatureUnit implements IMeasurable, QuantityDTO.IMeasurableUnit {
     CELSIUS(c -> c, c -> c),
     FAHRENHEIT(f -> (f - 32.0) * 5.0 / 9.0, c -> (c * 9.0 / 5.0) + 32.0),
     KELVIN(k -> k - 273.15, c -> c + 273.15);
@@ -46,5 +46,15 @@ public enum TemperatureUnit implements IMeasurable {
     @Override
     public String getUnitName() {
         return this.name();
+    }
+
+    @Override
+    public String getMeasurementType() {
+        return "TEMPERATURE";
+    }
+
+    @Override
+    public IMeasurable getUnitInstance(String name) {
+        return TemperatureUnit.valueOf(name);
     }
 }

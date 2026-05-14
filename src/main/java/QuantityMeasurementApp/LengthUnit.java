@@ -1,6 +1,6 @@
 package QuantityMeasurementApp;
 
-public enum LengthUnit implements IMeasurable {
+public enum LengthUnit implements IMeasurable, QuantityDTO.IMeasurableUnit {
     FEET(1.0),
     INCHES(1.0 / 12.0),
     YARDS(3.0),
@@ -27,5 +27,15 @@ public enum LengthUnit implements IMeasurable {
     @Override
     public String getUnitName() {
         return name();
+    }
+
+    @Override
+    public String getMeasurementType() {
+        return "LENGTH";
+    }
+
+    @Override
+    public IMeasurable getUnitInstance(String name) {
+        return LengthUnit.valueOf(name);
     }
 }
