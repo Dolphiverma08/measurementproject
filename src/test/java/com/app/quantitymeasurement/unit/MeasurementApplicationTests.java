@@ -251,4 +251,19 @@ class MeasurementApplicationTests {
         // Division returns double without arbitrary 2 decimal rounding since it's a scalar ratio
         assertEquals(3.3333333333333335, result, 0.000000001);
     }
+
+    @Test
+    void testEquality_FeetToYard_Smoke() {
+        assertEquals(new Quantity<>(1.0, LengthUnit.YARDS), new Quantity<>(3.0, LengthUnit.FEET));
+    }
+
+    @Test
+    void testEquality_InchToCM_Smoke() {
+        assertEquals(new Quantity<>(1.0, LengthUnit.INCHES), new Quantity<>(2.54, LengthUnit.CENTIMETERS));
+    }
+
+    @Test
+    void testEquality_GramToKG_Smoke() {
+        assertEquals(new Quantity<>(1.0, WeightUnit.KILOGRAM), new Quantity<>(1000.0, WeightUnit.GRAM));
+    }
 }
