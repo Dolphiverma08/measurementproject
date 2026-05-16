@@ -3,7 +3,7 @@ package com.app.quantitymeasurement.unit;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-class UC10GenericQuantityTest {
+class UC10_GenericQuantityTest {
 
     @Test
     void testIMeasurableInterface_LengthUnitImplementation() {

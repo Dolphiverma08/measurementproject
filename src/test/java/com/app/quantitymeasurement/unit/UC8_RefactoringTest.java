@@ -3,7 +3,7 @@ package com.app.quantitymeasurement.unit;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-class UC8RefactoringTest {
+class UC8_RefactoringTest {
 
     // --- ENUM TESTS ---
     @Test

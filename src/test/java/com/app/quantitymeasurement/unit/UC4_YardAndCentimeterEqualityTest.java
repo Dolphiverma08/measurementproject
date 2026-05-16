@@ -3,7 +3,7 @@ package com.app.quantitymeasurement.unit;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-class YardAndCentimeterEqualityTest {
+class UC4_YardAndCentimeterEqualityTest {
 
     @Test
     void testEquality_YardToYard_SameValue() {
