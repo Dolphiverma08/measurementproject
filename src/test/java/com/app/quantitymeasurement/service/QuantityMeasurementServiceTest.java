@@ -1,4 +1,4 @@
-package com.app.quantitymeasurement.services;
+package com.app.quantitymeasurement.service;
 
 import com.app.quantitymeasurement.entity.QuantityDTO;
 import com.app.quantitymeasurement.unit.LengthUnit;
@@ -6,6 +6,8 @@ import com.app.quantitymeasurement.unit.WeightUnit;
 import com.app.quantitymeasurement.unit.TemperatureUnit;
 import com.app.quantitymeasurement.repository.QuantityMeasurementCacheRepository;
 import com.app.quantitymeasurement.repository.IQuantityMeasurementRepository;
+import com.app.quantitymeasurement.services.IQuantityMeasurementService;
+import com.app.quantitymeasurement.services.QuantityMeasurementServiceImpl;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;

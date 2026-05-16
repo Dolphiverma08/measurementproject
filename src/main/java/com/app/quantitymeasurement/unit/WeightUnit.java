@@ -5,7 +5,7 @@ import com.app.quantitymeasurement.entity.QuantityDTO;
 public enum WeightUnit implements IMeasurable, QuantityDTO.IMeasurableUnit {
     KILOGRAM(1.0),
     GRAM(0.001),
-    POUND(0.453592);
+    POUND(1.0 / 2.20462);
 
     private final double conversionFactor;
 

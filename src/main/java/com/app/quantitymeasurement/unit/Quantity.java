@@ -6,6 +6,9 @@ public class Quantity<U extends IMeasurable> {
     private final double value;
     private final U unit;
 
+    public double getValue() { return value; }
+    public U getUnit() { return unit; }
+
     private enum ArithmeticOperation {
         ADD((a, b) -> a + b),
         SUBTRACT((a, b) -> a - b),
@@ -58,6 +61,7 @@ public class Quantity<U extends IMeasurable> {
     }
 
     public Quantity<U> convertTo(U target) {
+        if (target == null) throw new IllegalArgumentException("Target unit cannot be null");
         double converted = target.convertFromBaseUnit(unit.convertToBaseUnit(this.value));
         return new Quantity<>(round(converted), target);
     }
@@ -87,7 +91,9 @@ public class Quantity<U extends IMeasurable> {
         if (obj == null || getClass() != obj.getClass()) return false;
         Quantity<?> other = (Quantity<?>) obj;
         if (!this.unit.getClass().equals(other.unit.getClass())) return false;
-        return Double.compare(unit.convertToBaseUnit(this.value), other.unit.convertToBaseUnit(other.value)) == 0;
+        double v1 = unit.convertToBaseUnit(this.value);
+        double v2 = other.unit.convertToBaseUnit(other.value);
+        return Math.abs(v1 - v2) < 1e-9;
     }
 
     @Override

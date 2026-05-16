@@ -33,4 +33,9 @@ public class QuantityMeasurementCacheRepository implements IQuantityMeasurementR
     public List<QuantityMeasurementEntity> findAll() {
         return new ArrayList<>(cache);
     }
+
+    @Override
+    public void deleteAll() {
+        cache.clear();
+    }
 }
