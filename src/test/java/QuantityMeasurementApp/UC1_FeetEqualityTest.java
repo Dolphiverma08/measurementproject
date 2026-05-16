@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-class MeasurementApplicationTests {
+class UC1_FeetEqualityTest {
 
     @Test
 	void testFeetEquality_SameValue(){
