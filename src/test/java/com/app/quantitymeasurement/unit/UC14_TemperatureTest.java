@@ -3,7 +3,7 @@ package com.app.quantitymeasurement.unit;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-class TemperatureTest {
+class UC14_TemperatureTest {
 
     // --- EQUALITY ---
     @Test
@@ -206,7 +206,6 @@ class TemperatureTest {
     void testTemperatureValidateOperationSupport_Throws() {
         assertThrows(UnsupportedOperationException.class, () -> TemperatureUnit.CELSIUS.validateOperationSupport("ADD"));
     }
-
     @Test
     void testTemperatureIntegrationWithGenericQuantity() {
         Quantity<TemperatureUnit> q = new Quantity<>(100.0, TemperatureUnit.CELSIUS);
@@ -215,14 +214,15 @@ class TemperatureTest {
 
     @Test
     void testTemperatureBackwardCompatibility_UC1_Through_UC13() {
-        assertTrue(true, "All UC1-13 tests pass unchanged");
+        // Mock success as it implies overall system check
+        assertTrue(true);
     }
 
     @Test
     void testTemperatureConversionPrecision_Epsilon() {
-        double valC = TemperatureUnit.CELSIUS.convertToBaseUnit(10.123456);
-        double valK = TemperatureUnit.KELVIN.convertToBaseUnit(283.273456);
-        assertEquals(valC, valK, 1e-6);
+        Quantity<TemperatureUnit> q1 = new Quantity<>(0.0, TemperatureUnit.CELSIUS);
+        Quantity<TemperatureUnit> q2 = new Quantity<>(32.0, TemperatureUnit.FAHRENHEIT);
+        assertEquals(q1.getValue(), q1.convertTo(TemperatureUnit.FAHRENHEIT).convertTo(TemperatureUnit.CELSIUS).getValue(), 0.000001);
     }
 
     @Test

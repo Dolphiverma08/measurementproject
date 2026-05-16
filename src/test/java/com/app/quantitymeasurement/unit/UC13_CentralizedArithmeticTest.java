@@ -5,7 +5,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import static org.junit.jupiter.api.Assertions.*;
 
-class UC13CentralizedArithmeticTest {
+class UC13_CentralizedArithmeticTest {
 
     @Test
     void testRefactoring_Add_DelegatesViaHelper() {

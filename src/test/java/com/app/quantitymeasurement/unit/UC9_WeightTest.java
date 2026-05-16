@@ -3,7 +3,7 @@ package com.app.quantitymeasurement.unit;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-class WeightTest {
+class UC9_WeightTest {
 
     @Test
     void testEquality_KilogramToKilogram_SameValue() {
